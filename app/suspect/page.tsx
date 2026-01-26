@@ -44,7 +44,7 @@ export default function SuspectPage() {
                         <div className="grid grid-cols-2 gap-4 border-b border-dashed border-gray-400 pb-4">
                             <div>
                                 <span className="font-bold block text-gray-500 text-xs uppercase">Name</span>
-                                <span className="text-xl">Brook Solomon</span>
+                                <span className="text-xl">Brook Solomon A.K.A Solo codes</span>
                             </div>
                             <div>
                                 <span className="font-bold block text-gray-500 text-xs uppercase">Alias</span>
