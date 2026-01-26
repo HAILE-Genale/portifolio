@@ -53,6 +53,55 @@ export default function Home() {
         </div>
       </motion.div>
 
+      {/* --- EXTRA CRIME SCENE ELEMENTS --- */}
+
+      {/* Top Center - Crime Scene Tape */}
+      <div className="absolute top-0 left-0 w-full h-24 overflow-hidden pointer-events-none z-30 opacity-80">
+        <div className="absolute top-8 -left-10 w-[120%] h-10 bg-yellow-400 border-y-2 border-black -rotate-3 flex items-center justify-around font-mono text-black font-black text-sm tracking-tighter whitespace-nowrap shadow-xl">
+          {[...Array(10)].map((_, i) => (
+            <span key={i}>POLICE LINE - DO NOT CROSS - CRIME SCENE - </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom Center - Chalk Outline Segment & Evidence Pool */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-64 pointer-events-none">
+        {/* Large Blood Pool */}
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.4 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 w-96 h-32 bg-[#4a0000] blur-2xl rounded-[100%] z-0"
+        />
+
+        {/* Evidence Markers */}
+        <div className="absolute bottom-20 left-[45%] -translate-x-1/2 rotate-[-10deg]">
+          <div className="w-8 h-8 bg-yellow-400 border border-black flex items-center justify-center font-bold text-black text-xs shadow-lg"
+            style={{ clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)" }}>
+            01
+          </div>
+          <div className="w-4 h-1 bg-black/20 blur-sm mt-1" />
+        </div>
+
+        <div className="absolute bottom-12 left-[55%] translate-x-1/2 rotate-[15deg]">
+          <div className="w-10 h-10 bg-yellow-400 border border-black flex items-center justify-center font-bold text-black text-xs shadow-lg"
+            style={{ clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)" }}>
+            02
+          </div>
+          <div className="w-5 h-1 bg-black/20 blur-sm mt-1" />
+        </div>
+
+        {/* Partial Chalk Outline (Hand/Arm) */}
+        <svg className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-32 opacity-20 pointer-events-none">
+          <path
+            d="M30,30 Q50,10 80,40 T120,20"
+            fill="none"
+            stroke="white"
+            strokeWidth="3"
+            strokeDasharray="10,5"
+          />
+        </svg>
+      </div>
+
       {/* --- ARTIFACTS --- */}
 
       {/* 1. Suspect Profile (Top Left) */}
