@@ -25,15 +25,17 @@ export default function SuspectPage() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
                     {/* Mugshot Section */}
-                    <div className="col-span-1">
+                    <div className="col-span-1 flex justify-center md:block overflow-visible mt-4 md:mt-0">
                         <Polaroid
-                            src="https://placehold.co/400x500/333/FFF?text=MUGSHOT"
+                            src="/images/brook.png"
                             alt="Suspect Mugshot"
                             caption="BROOK SOLOMON"
                             rotation={-2}
-                            className="w-full"
+                            width={220}
+                            height={280}
+                            className="max-w-full"
                         />
                     </div>
 
@@ -71,7 +73,7 @@ export default function SuspectPage() {
                             <h3 className="font-display text-2xl border-b border-black inline-block">Background</h3>
                             <p className="leading-relaxed">
                                 History of involvement in competitive programming (ICPC).
-                                Recent activity suggests deep involvement with AI agents and automation bots.
+                                Recent activity suggests deep involvement with Typescript.
                             </p>
                         </div>
                     </div>

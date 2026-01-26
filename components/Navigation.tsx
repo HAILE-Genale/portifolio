@@ -3,35 +3,60 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 const items = [
-    { name: "Crime Scene", href: "/" },
-    { name: "Suspect", href: "/suspect" },
-    { name: "Evidence", href: "/evidence" },
-    { name: "Modus Operandi", href: "/modus-operandi" },
-    { name: "Timeline", href: "/timeline" },
+    { name: "CRIME SCENE", href: "/" },
+    { name: "SUSPECT", href: "/suspect" },
+    { name: "EVIDENCE", href: "/evidence" },
+    { name: "MODUS OPERANDI", href: "/modus-operandi" },
+    { name: "TIMELINE", href: "/timeline" },
 ];
 
 export function Navigation() {
     const pathname = usePathname();
 
     return (
-        <nav className="fixed top-0 left-0 w-full z-50 flex justify-center pt-4 pointer-events-none">
-            <div className="flex space-x-2 pointer-events-auto">
-                {items.map((item) => (
-                    <Link
-                        key={item.href}
-                        href={item.href}
-                        className={cn(
-                            "px-6 py-2 rounded-t-lg font-display text-sm uppercase tracking-widest transition-all duration-300 border-t border-l border-r border-[#3a3a3a]",
-                            pathname === item.href
-                                ? "bg-[#f4e4bc] text-[#0e0e0e] translate-y-2 shadow-[0_-5px_15px_rgba(0,0,0,0.5)]"
-                                : "bg-[#1a1a1a] text-[#888] hover:bg-[#2a2a2a] hover:text-[#ccc]"
-                        )}
-                    >
-                        {item.name}
-                    </Link>
-                ))}
+        <nav className="fixed top-0 left-0 w-full z-[100] flex justify-center pt-2 pointer-events-none">
+            <div className="flex -space-x-1 pointer-events-auto">
+                {items.map((item, idx) => {
+                    const isActive = pathname === item.href;
+                    return (
+                        <Link key={item.href} href={item.href}>
+                            <motion.div
+                                whileHover={{ y: -4 }}
+                                className={cn(
+                                    "relative px-4 md:px-6 py-3 font-display text-xs md:text-sm tracking-widest transition-all duration-300",
+                                    "border-t-2 border-x border-black/20",
+                                    "rounded-t-xl group cursor-none",
+                                    isActive
+                                        ? "bg-[#d4c598] text-red-900 shadow-[0_-8px_20px_rgba(0,0,0,0.3)] z-10 -translate-y-1"
+                                        : "bg-[#2a2a2a] text-gray-500 hover:bg-[#333] hover:text-gray-300 z-0"
+                                )}
+                                style={{
+                                    clipPath: "polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%)",
+                                    zIndex: isActive ? 50 : 10 - idx
+                                }}
+                            >
+                                <span className="relative">
+                                    {item.name}
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="activeTab"
+                                            className="absolute -bottom-1 left-0 w-full h-0.5 bg-red-800/50"
+                                        />
+                                    )}
+                                </span>
+
+                                {/* Folder Lip effect */}
+                                <div className={cn(
+                                    "absolute top-0 left-0 w-full h-1 opacity-20",
+                                    isActive ? "bg-white" : "bg-black"
+                                )} />
+                            </motion.div>
+                        </Link>
+                    );
+                })}
             </div>
         </nav>
     );
