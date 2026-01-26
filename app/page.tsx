@@ -89,22 +89,6 @@ export default function Home() {
           </div>
           <div className="w-5 h-1 bg-black/20 blur-sm mt-1" />
         </div>
-
-        {/* Chalk Outline (Detailed Human Silhouette - Solid Line) */}
-        <svg className="absolute bottom-[-50px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] opacity-20 pointer-events-none overflow-visible">
-          <path
-            d="M400,150 
-               C425,150 445,170 445,200 C445,230 425,250 400,250 C375,250 355,230 355,200 C355,170 375,150 400,150
-               M375,245 L340,260 L280,250 L240,280 L260,310 L320,290 L350,300
-               L350,450 L280,550 L325,570 L380,470 L420,470 L475,570 L520,550 L450,450
-               L450,300 L480,290 L540,310 L560,280 L520,250 L460,260 L425,245
-               Z"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-            strokeLinejoin="round"
-          />
-        </svg>
       </div>
 
       {/* --- ARTIFACTS --- */}
