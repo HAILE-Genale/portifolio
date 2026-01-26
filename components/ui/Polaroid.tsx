@@ -27,16 +27,18 @@ export function Polaroid({
 }: PolaroidProps) {
     return (
         <motion.div
+            initial={{ scale: 1, rotate: rotation }}
+            animate={{ scale: 1, rotate: rotation }}
             whileHover={{
                 scale: 1.08,
-                rotate: rotation + (rotation > 0 ? 2 : -2),
+                rotate: rotation + (rotation > 0 ? 3 : -3),
                 transition: { type: "spring", stiffness: 300, damping: 20 }
             }}
+            transition={{ type: "spring", stiffness: 200, damping: 25 }}
             className={cn(
                 "bg-white p-3 pb-8 shadow-[0_10px_20px_rgba(0,0,0,0.5)] cursor-pointer transition-shadow hover:shadow-[0_40px_80px_rgba(0,0,0,0.8)] inline-block relative border border-white/20",
                 className
             )}
-            style={{ rotate: `${rotation}deg` }}
             onClick={onClick}
         >
             {/* Push Pin */}

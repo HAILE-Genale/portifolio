@@ -49,9 +49,9 @@ export const CustomCursor = () => {
                 }}
             />
 
-            {/* Magnifying Glass Cursor - Sleeker design */}
+            {/* Magnifying Glass Cursor - Hand-held design */}
             <motion.div
-                className="fixed top-0 left-0 w-8 h-8 pointer-events-none z-[9999] mix-blend-difference"
+                className="fixed top-0 left-0 w-16 h-16 pointer-events-none z-[9999]"
                 style={{
                     x: cursorX,
                     y: cursorY,
@@ -59,15 +59,30 @@ export const CustomCursor = () => {
                     translateY: "-50%",
                 }}
             >
-                <div className="relative w-full h-full border border-white/80 rounded-full flex items-center justify-center shadow-lg">
-                    {/* Minimal Lens crosshair */}
-                    <div className="absolute w-[1px] h-2 bg-white/40 top-0 left-1/2 -translate-x-1/2" />
-                    <div className="absolute w-[1px] h-2 bg-white/40 bottom-0 left-1/2 -translate-x-1/2" />
-                    <div className="absolute w-2 h-[1px] bg-white/40 left-0 top-1/2 -translate-y-1/2" />
-                    <div className="absolute w-2 h-[1px] bg-white/40 right-0 top-1/2 -translate-y-1/2" />
+                <div className="relative w-full h-full">
+                    {/* Lens Rim (Metallic) */}
+                    <div className="absolute inset-0 border-[3px] border-[#444] rounded-full shadow-[0_0_10px_rgba(0,0,0,0.5),inset_0_0_5px_rgba(255,255,255,0.2)] bg-white/5 backdrop-blur-[1px]">
+                        {/* Inner Highlight */}
+                        <div className="absolute inset-[1px] border border-white/20 rounded-full" />
+                    </div>
 
-                    {/* Sleek handle */}
-                    <div className="absolute top-[85%] left-[85%] w-[1.5px] h-5 bg-white origin-top rotate-[35deg] rounded-full" />
+                    {/* Lens Flare / Reflection */}
+                    <div className="absolute top-[15%] left-[15%] w-[30%] h-[30%] bg-gradient-to-br from-white/40 to-transparent rounded-full blur-[1px]" />
+                    <div className="absolute bottom-[20%] right-[20%] w-[10%] h-[10%] bg-white/20 rounded-full blur-[2px]" />
+
+                    {/* Hand-held Handle */}
+                    <div className="absolute top-[80%] left-[80%] w-3 h-12 origin-top rotate-[35deg] shadow-lg">
+                        {/* Dark Wood/Plastic Grip */}
+                        <div className="w-full h-full bg-gradient-to-b from-[#222] via-[#333] to-[#111] rounded-b-md border-x border-black/50 relative overflow-hidden">
+                            {/* Grip Ridges */}
+                            <div className="absolute inset-x-0 top-2 h-[1px] bg-black/30" />
+                            <div className="absolute inset-x-0 top-4 h-[1px] bg-black/30" />
+                            <div className="absolute inset-x-0 top-6 h-[1px] bg-black/30" />
+                            <div className="absolute inset-x-0 top-8 h-[1px] bg-black/30" />
+                        </div>
+                        {/* Metallic Ferrule (Connection) */}
+                        <div className="absolute -top-1 inset-x-0 h-3 bg-[#444] rounded-t-sm border border-white/10" />
+                    </div>
                 </div>
             </motion.div>
 

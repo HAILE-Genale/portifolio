@@ -113,11 +113,18 @@ export default function Home() {
 
       {/* --- STRINGS --- */}
       <div className="absolute inset-0 pointer-events-none hidden md:block">
-        {/* Strings connected to center hub (approx 50/50) */}
-        <RedString x1Percent={20} y1Percent={30} x2Percent={50} y2Percent={50} delay={0.5} />
-        <RedString x1Percent={80} y1Percent={30} x2Percent={50} y2Percent={50} delay={0.7} />
-        <RedString x1Percent={25} y1Percent={70} x2Percent={50} y2Percent={50} delay={0.9} />
-        <RedString x1Percent={75} y1Percent={70} x2Percent={50} y2Percent={50} delay={1.1} />
+        {/* Strings connected to center hub (50/50) */}
+        {/* Suspect (centered at roughly 18/28) */}
+        <RedString x1Percent={16} y1Percent={28} x2Percent={50} y2Percent={50} delay={0.5} />
+
+        {/* Timeline (centered at roughly 83/30) */}
+        <RedString x1Percent={87} y1Percent={32} x2Percent={50} y2Percent={50} delay={0.7} />
+
+        {/* Modus Operandi (centered at roughly 20/75) */}
+        <RedString x1Percent={20} y1Percent={76} x2Percent={50} y2Percent={50} delay={0.9} />
+
+        {/* Evidence (centered at roughly 80/75) */}
+        <RedString x1Percent={82} y1Percent={76} x2Percent={50} y2Percent={50} delay={1.1} />
       </div>
 
     </div>
