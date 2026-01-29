@@ -52,12 +52,14 @@ const EVIDENCE: Project[] = [
     },
     {
         id: 4,
-        title: "Mobile Delta",
-        type: "Mobile App",
-        images: ["/images/project-d.png"],
-        tech: ["React Native", "Firebase", "Redux"],
-        desc: "Cross-platform mobile application for incident reporting.",
-        date: "2024-02-05"
+        title: "WebMTP",
+        type: "Website",
+        images: ["/images/projects/webmtp/1.png", "/images/projects/webmtp/2.png"],
+        tech: ["NextJs", "Tailwind"],
+        desc: "connect and directly access your phone storage from the web on MacOs without any installs.",
+        date: "2024-02-05",
+        live: "https://webmtp.detached.space",
+        github: "https://github.com/detached-space/webmtp"
     },
     {
         id: 5,
