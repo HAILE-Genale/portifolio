@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Polaroid } from "@/components/ui/Polaroid";
-import { X, Search, Filter } from "lucide-react";
+import { X, Search, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Mock Data
 const EVIDENCE = [
@@ -113,6 +113,8 @@ export default function EvidencePage() {
     const [searchQuery, setSearchQuery] = useState("");
     const [activeTech, setActiveTech] = useState<string | null>(null);
     const [isArchiveOpen, setIsArchiveOpen] = useState(false);
+    const [fullscreenImageIndex, setFullscreenImageIndex] = useState<number | null>(null);
+
 
     const allTech = useMemo(() => {
         const techs = new Set<string>();
@@ -133,6 +135,27 @@ export default function EvidencePage() {
     }, [searchQuery, activeTech]);
 
     const selectedItem = EVIDENCE.find((e) => e.id === selectedId);
+
+    // Keyboard Navigation for Fullscreen Viewer
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (fullscreenImageIndex === null || !selectedItem) return;
+
+            if (e.key === "ArrowRight") {
+                setFullscreenImageIndex((prev) =>
+                    prev !== null ? (prev + 1) % selectedItem.images.length : null
+                );
+            } else if (e.key === "ArrowLeft") {
+                setFullscreenImageIndex((prev) =>
+                    prev !== null ? (prev - 1 + selectedItem.images.length) % selectedItem.images.length : null
+                );
+            } else if (e.key === "Escape") {
+                setFullscreenImageIndex(null);
+            }
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [fullscreenImageIndex, selectedItem]);
 
     return (
         <div className="container mx-auto p-8 relative min-h-screen">
@@ -356,7 +379,11 @@ export default function EvidencePage() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-6 h-full overflow-y-auto pr-2 pb-8">
                                     <div className="space-y-6">
                                         {selectedItem.images.map((img, idx) => (
-                                            <div key={idx} className={`relative bg-gray-200 border border-gray-300 p-2 shadow-md transform ${idx % 2 === 0 ? 'rotate-1' : '-rotate-1'} transition-transform hover:rotate-0 hover:z-10 group/img`}>
+                                            <div
+                                                key={idx}
+                                                className={`relative bg-gray-200 border border-gray-300 p-2 shadow-md transform ${idx % 2 === 0 ? 'rotate-1' : '-rotate-1'} transition-transform hover:rotate-0 hover:z-10 group/img cursor-zoom-in`}
+                                                onClick={() => setFullscreenImageIndex(idx)}
+                                            >
                                                 <img
                                                     src={img}
                                                     alt={`${selectedItem.title} ${idx + 1}`}
@@ -392,6 +419,77 @@ export default function EvidencePage() {
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Fullscreen Image Viewer */}
+            <AnimatePresence>
+                {fullscreenImageIndex !== null && selectedItem && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-12"
+                        onClick={() => setFullscreenImageIndex(null)}
+                    >
+                        <button
+                            className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors z-[2100]"
+                            onClick={() => setFullscreenImageIndex(null)}
+                        >
+                            <X className="w-10 h-10" />
+                        </button>
+
+                        {/* Navigation Controls */}
+                        {selectedItem.images.length > 1 && (
+                            <>
+                                <button
+                                    className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors z-[2100] group"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setFullscreenImageIndex((prev) =>
+                                            prev !== null ? (prev - 1 + selectedItem.images.length) % selectedItem.images.length : null
+                                        );
+                                    }}
+                                >
+                                    <ChevronLeft className="w-16 h-16 transform group-hover:scale-110 transition-transform" />
+                                </button>
+                                <button
+                                    className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors z-[2100] group"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setFullscreenImageIndex((prev) =>
+                                            prev !== null ? (prev + 1) % selectedItem.images.length : null
+                                        );
+                                    }}
+                                >
+                                    <ChevronRight className="w-16 h-16 transform group-hover:scale-110 transition-transform" />
+                                </button>
+                            </>
+                        )}
+
+                        <motion.div
+                            key={fullscreenImageIndex}
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            className="relative max-w-full max-h-full flex items-center justify-center"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <img
+                                src={selectedItem.images[fullscreenImageIndex]}
+                                alt="Evidence Focus"
+                                className="max-w-full max-h-[85vh] object-contain shadow-[0_0_100px_rgba(0,0,0,0.5)] border-4 border-white/10"
+                            />
+
+                            {/* Metadata Overlay */}
+                            <div className="absolute -bottom-16 left-0 right-0 text-center font-mono">
+                                <p className="text-white text-xs tracking-[0.5em] uppercase opacity-40 mb-1">Investigation Artifact</p>
+                                <p className="text-red-600 font-bold uppercase tracking-widest">
+                                    {selectedItem.title} // EXHIBIT {fullscreenImageIndex + 1}
+                                </p>
                             </div>
                         </motion.div>
                     </motion.div>
