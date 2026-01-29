@@ -23,7 +23,7 @@ const EVIDENCE: Project[] = [
         id: 1,
         title: "Totals",
         type: "Mobile App",
-        images: ["/images/project-a.png", "/images/project-a-2.png", "/images/project-a-3.png"],
+        images: ["/images/projects/totals/1.png", "/images/projects/totals/2.png", "/images/projects/totals/3.png", "/images/projects/totals/4.png",],
         tech: ["Flutter", "NextJs",],
         desc: "mobile app that automatically tracks your bank transactions by parsing SMS messages from Ethiopian banks. It gives you real-time balance updates, detailed transaction history, smart analytics, and clear financial insights, all stored securely on your device.",
         date: "2025-12-15",

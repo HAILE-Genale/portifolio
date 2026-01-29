@@ -46,19 +46,25 @@ export function Polaroid({
                 <div className="absolute top-1 left-1 w-1 h-1 bg-red-400 rounded-full opacity-50" />
             </div>
 
-            <div className="relative overflow-hidden bg-gray-200" style={{ width, height }}>
+            <div
+                className="relative overflow-hidden bg-white/5 grayscale hover:grayscale-0 transition-all duration-500"
+                style={{
+                    width: width || '100%',
+                    aspectRatio: height && width ? `${width}/${height}` : '1/1'
+                }}
+            >
                 <Image
                     src={src}
                     alt={alt}
                     fill
-                    className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                    className="object-contain transition-all duration-500"
                 />
                 {/* Paper Texture Overlay */}
                 <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply"
                     style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/natural-paper.png')" }} />
             </div>
             {caption && (
-                <p className="mt-3 text-center font-hand text-black text-xl transform -rotate-1">
+                <p className="mt-3 text-center font-hand text-black text-lg transform -rotate-1 truncate px-2">
                     {caption}
                 </p>
             )}
