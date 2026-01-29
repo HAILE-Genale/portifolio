@@ -63,12 +63,14 @@ const EVIDENCE: Project[] = [
     },
     {
         id: 5,
-        title: "Crawler Epsilon",
-        type: "Web Scraper",
-        images: ["/images/project-e.png"],
-        tech: ["Go", "gRPC", "MongoDB"],
-        desc: "High-performance distributed web crawler and indexer.",
-        date: "2023-09-28"
+        title: "Ora browser",
+        type: "MacOs native app",
+        images: ["/images/projects/ora/1.png"],
+        tech: ["Swift", "MacOs SDK", "Webkit"],
+        desc: "Ora is an open-source macOS browser built with Swift and WebKit. Fast, secure, and native Arc alternative that puts users first with smooth tab management, spaces, vertical sidebar, and many more.",
+        date: "2025-09-08",
+        live: "https://www.orabrowser.com/",
+        github: "https://github.com/the-ora/browser"
     },
     {
         id: 6,
