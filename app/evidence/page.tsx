@@ -113,13 +113,18 @@ export default function EvidencePage() {
     const [fullscreenImageIndex, setFullscreenImageIndex] = useState<number | null>(null);
 
 
-    const allTech = useMemo(() => {
+    const { commonTechs, archivedTechs, allTechs } = useMemo(() => {
         const techs = new Set<string>();
-        EVIDENCE.forEach(item => item.tech.forEach(t => techs.add(t)));
-        return Array.from(techs).sort();
-    }, []);
+        EVIDENCE.forEach(item => item.tech.forEach(t => techs.add(t.trim())));
+        const all = Array.from(techs).sort();
+        const commonList = ["NextJs", "Tailwind", "Flutter", "Supabase", "Python"].map(t => t.toLowerCase());
 
-    const commonTech = ["NextJs", "Tailwind", "Flutter", "Supabase", "Python"];
+        return {
+            allTechs: all,
+            commonTechs: all.filter(t => commonList.includes(t.toLowerCase())),
+            archivedTechs: all.filter(t => !commonList.includes(t.toLowerCase()))
+        };
+    }, []);
 
     const filteredEvidence = useMemo(() => {
         return EVIDENCE.filter(item => {
@@ -189,10 +194,10 @@ export default function EvidencePage() {
 
             {/* Filter & Search UI */}
             <div className="max-w-5xl mx-auto mb-16 space-y-6">
-                <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between bg-black/5 p-6 backdrop-blur-md border border-black/10 rounded-sm relative overflow-hidden group">
+                <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between bg-black/5 p-6 backdrop-blur-md border border-black/10 rounded-sm relative group z-[100]">
                     {/* Decorative tape on corners */}
-                    <div className="absolute -top-4 -left-8 w-24 h-8 bg-black/5 rotate-[45deg] pointer-events-none" />
-                    <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-black/5 rotate-[45deg] pointer-events-none" />
+                    <div className="absolute -top-1 -left-1 w-8 h-4 bg-black/5 rotate-[45deg] pointer-events-none" />
+                    <div className="absolute -bottom-1 -right-1 w-8 h-4 bg-black/5 rotate-[45deg] pointer-events-none" />
 
                     {/* Search Bar */}
                     <div className="relative w-full lg:w-80 group/search">
@@ -209,69 +214,74 @@ export default function EvidencePage() {
                     {/* Filter Groups */}
                     <div className="flex flex-wrap gap-8 items-center flex-1 justify-end font-mono">
                         {/* Tech Group */}
-                        <div className="flex flex-wrap gap-2 items-center">
-                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mr-2">TECH STACK:</span>
-                            <button
-                                onClick={() => setActiveTechs([])}
-                                className={`relative px-3 py-1 text-[11px] transition-all group/btn ${activeTechs.length === 0 ? 'text-red-900 font-bold' : 'text-gray-500 hover:text-red-900'}`}
-                            >
-                                ALL TOOLS
-                                <div className={`absolute -bottom-1 left-0 h-[2px] bg-red-900/60 rounded-full transition-all duration-300 ${activeTechs.length === 0 ? 'w-full' : 'w-0 group-hover/btn:w-full'}`} />
-                            </button>
-                            {commonTech.map(tech => (
-                                <button
-                                    key={tech}
-                                    onClick={() => {
-                                        setActiveTechs(prev =>
-                                            prev.includes(tech) ? prev.filter(t => t !== tech) : [...prev, tech]
-                                        );
-                                    }}
-                                    className={`relative px-3 py-1 text-[11px] transition-all group/btn ${activeTechs.includes(tech) ? 'text-red-900 font-bold' : 'text-gray-500 hover:text-red-900'}`}
-                                >
-                                    {tech.toUpperCase()}
-                                    <div className={`absolute -bottom-1 left-0 h-[2px] bg-red-900/60 rounded-full transition-all duration-300 ${activeTechs.includes(tech) ? 'w-full' : 'w-0 group-hover/btn:w-full'}`} />
-                                </button>
-                            ))}
-                        </div>
-
-                        {allTech.some(t => !commonTech.includes(t)) && (
-                            <div className="relative">
-                                <button
-                                    onClick={() => setIsArchiveOpen(!isArchiveOpen)}
-                                    className={`px-3 py-1 text-[10px] font-mono border flex items-center gap-1 transition-all ${isArchiveOpen ? 'bg-red-900 text-white border-red-900' : 'bg-transparent text-gray-400 border-black/10 hover:border-red-900 hover:text-red-900'}`}
-                                >
-                                    {isArchiveOpen ? 'CLOSE ARCHIVE' : 'EXPAND ARCHIVE'} <Filter className="w-3 h-3" />
-                                </button>
-
-                                <AnimatePresence>
-                                    {isArchiveOpen && (
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                            className="absolute right-0 top-full mt-2 w-64 bg-[#f8f5e9] border border-[#d3c299] shadow-[20px_20px_40px_rgba(0,0,0,0.2)] z-[60] p-4 origin-top-right"
+                        <div className="flex flex-wrap items-center justify-end gap-x-6 gap-y-3">
+                            <div className="flex items-center gap-2 flex-wrap justify-end">
+                                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mr-2 shrink-0">TECH STACK:</span>
+                                <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 justify-end">
+                                    <button
+                                        onClick={() => setActiveTechs([])}
+                                        className={`relative px-3 py-1 text-[11px] transition-all group/btn ${activeTechs.length === 0 ? 'text-red-900 font-bold' : 'text-gray-500 hover:text-red-900'}`}
+                                    >
+                                        ALL TOOLS
+                                        <div className={`absolute -bottom-1 left-0 h-[2px] bg-red-900/60 rounded-full transition-all duration-300 ${activeTechs.length === 0 ? 'w-full' : 'w-0 group-hover/btn:w-full'}`} />
+                                    </button>
+                                    {commonTechs.map(tech => (
+                                        <button
+                                            key={tech}
+                                            onClick={() => {
+                                                setActiveTechs(prev =>
+                                                    prev.includes(tech) ? prev.filter(t => t !== tech) : [...prev, tech]
+                                                );
+                                            }}
+                                            className={`relative px-3 py-1 text-[11px] transition-all group/btn ${activeTechs.includes(tech) ? 'text-red-900 font-bold' : 'text-gray-500 hover:text-red-900'}`}
                                         >
-                                            <div className="text-[9px] font-bold text-gray-400 mb-2 border-b border-black/5 pb-1 uppercase tracking-widest text-center">Classified Technologies</div>
-                                            <div className="grid grid-cols-2 gap-2">
-                                                {allTech.filter(t => !commonTech.includes(t)).map(tech => (
-                                                    <button
-                                                        key={tech}
-                                                        onClick={() => {
-                                                            setActiveTechs(prev =>
-                                                                prev.includes(tech) ? prev.filter(t => t !== tech) : [...prev, tech]
-                                                            );
-                                                        }}
-                                                        className={`px-2 py-1.5 text-[10px] font-mono border text-left truncate transition-all ${activeTechs.includes(tech) ? 'bg-red-900 text-white border-red-900' : 'hover:bg-red-800/10 hover:border-red-900/30 text-gray-600'}`}
+                                            {tech.toUpperCase()}
+                                            <div className={`absolute -bottom-1 left-0 h-[2px] bg-red-900/60 rounded-full transition-all duration-300 ${activeTechs.includes(tech) ? 'w-full' : 'w-0 group-hover/btn:w-full'}`} />
+                                        </button>
+                                    ))}
+                                    {archivedTechs.length > 0 && (
+                                        <div className="relative inline-block ml-4">
+                                            <button
+                                                onClick={() => setIsArchiveOpen(!isArchiveOpen)}
+                                                className={`px-3 py-1 text-[10px] font-mono border flex items-center gap-1 transition-all ${isArchiveOpen ? 'bg-red-900 text-white border-red-900' : 'bg-transparent text-gray-400 border-black/10 hover:border-red-900 hover:text-red-900'}`}
+                                            >
+                                                MORE <Filter className="w-3 h-3" />
+                                            </button>
+
+                                            <AnimatePresence>
+                                                {isArchiveOpen && (
+                                                    <motion.div
+                                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                        className="absolute right-0 top-full mt-2 w-64 bg-[#f8f5e9] border border-[#d3c299] shadow-[20px_20px_40px_rgba(0,0,0,0.2)] z-[110] p-4 origin-top-right"
                                                     >
-                                                        {tech.toUpperCase()}
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        </motion.div>
+                                                        <div className="text-[9px] font-bold text-gray-400 mb-2 border-b border-black/5 pb-1 uppercase tracking-widest text-center">Classified Technologies</div>
+                                                        <div className="grid grid-cols-2 gap-2">
+                                                            {archivedTechs.length > 0 ? archivedTechs.map(tech => (
+                                                                <button
+                                                                    key={tech}
+                                                                    onClick={() => {
+                                                                        setActiveTechs(prev =>
+                                                                            prev.includes(tech) ? prev.filter(t => t !== tech) : [...prev, tech]
+                                                                        );
+                                                                    }}
+                                                                    className={`px-2 py-1.5 text-[10px] font-mono border text-left truncate transition-all ${activeTechs.includes(tech) ? 'bg-red-900 text-white border-red-900' : 'hover:bg-red-800/10 hover:border-red-900/30 text-gray-600'}`}
+                                                                >
+                                                                    {tech.toUpperCase()}
+                                                                </button>
+                                                            )) : (
+                                                                <div className="col-span-2 text-center text-[9px] text-gray-400 py-4 uppercase">No additional assets found</div>
+                                                            )}
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
                                     )}
-                                </AnimatePresence>
+                                </div>
                             </div>
-                        )}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -315,7 +325,7 @@ export default function EvidencePage() {
                                     alt={item.title}
                                     caption={item.title}
                                     rotation={rot}
-                                    className="w-[280px] z-10 transition-all duration-500 ease-out group-hover:z-[40]"
+                                    className="z-10 transition-all duration-500 ease-out group-hover:z-[40]"
                                     onClick={() => setSelectedId(item.id)}
                                 />
 
@@ -419,7 +429,7 @@ export default function EvidencePage() {
                                             </div>
                                         ) : (
                                             <div
-                                                className="relative bg-gray-200 border border-gray-300 p-2 shadow-md transform rotate-1 hover:rotate-0 transition-all duration-500 group/img cursor-zoom-in"
+                                                className="relative bg-white/50 border border-gray-300 p-2 shadow-md transform rotate-1 hover:rotate-0 transition-all duration-500 group/img cursor-zoom-in"
                                                 onClick={() => setFullscreenImageIndex(0)}
                                             >
                                                 <img
