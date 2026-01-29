@@ -3,10 +3,22 @@
 import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Polaroid } from "@/components/ui/Polaroid";
-import { X, Search, Filter, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, Search, Filter, ChevronLeft, ChevronRight, Github, ExternalLink } from "lucide-react";
 
 // Mock Data
-const EVIDENCE = [
+interface Project {
+    id: number;
+    title: string;
+    type: string;
+    images: string[];
+    tech: string[];
+    desc: string;
+    date: string;
+    github?: string;
+    live?: string;
+}
+
+const EVIDENCE: Project[] = [
     {
         id: 1,
         title: "Totals",
@@ -14,7 +26,9 @@ const EVIDENCE = [
         images: ["/images/project-a.png", "/images/project-a-2.png", "/images/project-a-3.png"],
         tech: ["Flutter", "NextJs",],
         desc: "mobile app that automatically tracks your bank transactions by parsing SMS messages from Ethiopian banks. It gives you real-time balance updates, detailed transaction history, smart analytics, and clear financial insights, all stored securely on your device.",
-        date: "2025-12-15"
+        date: "2025-12-15",
+
+        live: "https://totals-app.vercel.app"
     },
     {
         id: 2,
@@ -22,17 +36,19 @@ const EVIDENCE = [
         type: "Website",
         images: ["/images/projects/binger/1.png", "/images/projects/binger/2.png",],
         tech: ["Sveltekit", "Firebase", "Tailwind"],
-        desc: "a movie streaming platform that also lets you track your watched",
-        date: "2024-01-20"
+        desc: "The binger is a movie streaming platform that lets you stream any movie in the world and also lets you track your watched movies on the website.",
+        date: "2024-01-20",
+        live: "https://the-binger.vercel.app"
     },
     {
         id: 3,
-        title: "System Gamma",
-        type: "Internal Tool",
-        images: ["/images/project-c.png", "/images/project-c-alt.png"],
-        tech: ["React", "Node.js", "Redis"],
-        desc: "Real-time dashboard for monitoring server metrics.",
-        date: "2023-11-10"
+        title: "Opus",
+        type: "Mobile App",
+        images: ["/images/projects/opus/1.png", "/images/projects/opus/2.png", "/images/projects/opus/3.png"],
+        tech: ["Flutter", "Supabase",],
+        desc: "Music Without Limits Stream endlessly. Discover effortlessly. Experience music like never before.",
+        date: "2025-06-23",
+        live: "https://opus.detached.space"
     },
     {
         id: 4,
@@ -376,25 +392,58 @@ export default function EvidencePage() {
                                     INCIDENT REPORT: {selectedItem.title}
                                 </h2>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-6 h-full overflow-y-auto pr-2 pb-8">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-6 pb-8">
                                     <div className="space-y-6">
-                                        {selectedItem.images.map((img, idx) => (
+                                        {selectedItem.images.length > 1 ? (
+                                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                                <div
+                                                    className="sm:col-span-2 relative bg-gray-200 border border-gray-300 p-2 shadow-lg transform rotate-1 hover:rotate-0 transition-all duration-500 group/img cursor-zoom-in overflow-hidden h-fit"
+                                                    onClick={() => setFullscreenImageIndex(0)}
+                                                >
+                                                    <img
+                                                        src={selectedItem.images[0]}
+                                                        alt={`${selectedItem.title} 1`}
+                                                        className="w-full h-auto grayscale border border-black/10 group-hover/img:grayscale-0 transition-all duration-500"
+                                                    />
+                                                    <div className="absolute top-3 right-3 bg-black/80 text-white text-[9px] px-2 py-0.5 font-mono uppercase tracking-tighter">
+                                                        PRIMARY_FORENSIC_VIEW
+                                                    </div>
+                                                </div>
+                                                <div className="sm:col-span-1 grid grid-cols-2 sm:grid-cols-1 gap-3 content-start">
+                                                    {selectedItem.images.slice(1).map((img, idx) => (
+                                                        <div
+                                                            key={idx}
+                                                            className={`relative bg-gray-200 border border-gray-300 p-1.5 shadow-md transform ${idx % 2 === 0 ? '-rotate-2' : 'rotate-2'} hover:rotate-0 transition-all duration-300 group/img cursor-zoom-in`}
+                                                            onClick={() => setFullscreenImageIndex(idx + 1)}
+                                                        >
+                                                            <img
+                                                                src={img}
+                                                                alt={`${selectedItem.title} ${idx + 2}`}
+                                                                className="w-full aspect-square object-cover grayscale border border-black/10 group-hover/img:grayscale-0 transition-all duration-500"
+                                                            />
+                                                            <div className="absolute top-1 right-1 bg-black/80 text-white text-[7px] px-1 font-mono uppercase tracking-tighter">
+                                                                FILE_{idx + 2}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ) : (
                                             <div
-                                                key={idx}
-                                                className={`relative bg-gray-200 border border-gray-300 p-2 shadow-md transform ${idx % 2 === 0 ? 'rotate-1' : '-rotate-1'} transition-transform hover:rotate-0 hover:z-10 group/img cursor-zoom-in`}
-                                                onClick={() => setFullscreenImageIndex(idx)}
+                                                className="relative bg-gray-200 border border-gray-300 p-2 shadow-md transform rotate-1 hover:rotate-0 transition-all duration-500 group/img cursor-zoom-in"
+                                                onClick={() => setFullscreenImageIndex(0)}
                                             >
                                                 <img
-                                                    src={img}
-                                                    alt={`${selectedItem.title} ${idx + 1}`}
+                                                    src={selectedItem.images[0]}
+                                                    alt={selectedItem.title}
                                                     className="w-full grayscale border border-black/10 group-hover/img:grayscale-0 transition-all duration-500"
                                                 />
                                                 <div className="absolute top-2 right-2 bg-black/80 text-white text-[8px] px-1 font-mono uppercase tracking-tighter">
-                                                    FILE_{idx + 1}
+                                                    SOLE_EXHIBIT
                                                 </div>
                                             </div>
-                                        ))}
-                                        <div className="text-[10px] font-mono text-gray-400 text-center mt-4">--- END OF VISUAL EVIDENCE ---</div>
+                                        )}
+                                        <div className="text-[10px] font-mono text-gray-400 text-center mt-6 uppercase tracking-widest opacity-50">--- End of Forensic Documentation ---</div>
                                     </div>
 
                                     <div className="space-y-4 font-typewriter">
@@ -411,6 +460,36 @@ export default function EvidencePage() {
                                                 ))}
                                             </div>
                                         </div>
+
+                                        {(selectedItem.github || selectedItem.live) && (
+                                            <div>
+                                                <h4 className="font-bold bg-black text-white inline-block px-1 mb-1 text-xs">LINKS</h4>
+                                                <div className="flex flex-col gap-2">
+                                                    {selectedItem.live && (
+                                                        <a
+                                                            href={selectedItem.live}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="flex items-center gap-2 group/link text-sm hover:text-red-900 transition-colors w-fit underline decoration-black/20 underline-offset-4"
+                                                        >
+                                                            <ExternalLink className="w-4 h-4" />
+                                                            <span className="font-bold">LIVE_SITE.EXE</span>
+                                                        </a>
+                                                    )}
+                                                    {selectedItem.github && (
+                                                        <a
+                                                            href={selectedItem.github}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="flex items-center gap-2 group/link text-sm hover:text-red-900 transition-colors w-fit underline decoration-black/20 underline-offset-4"
+                                                        >
+                                                            <Github className="w-4 h-4" />
+                                                            <span className="font-bold">SOURCE_FILES.ZIP</span>
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
 
                                         <div className="pt-4">
                                             <p className="text-xs text-red-700 font-bold uppercase border-2 border-red-700 inline-block p-1 transform -rotate-6">
