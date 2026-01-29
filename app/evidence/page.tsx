@@ -74,21 +74,24 @@ const EVIDENCE: Project[] = [
     },
     {
         id: 6,
-        title: "Analytic Zeta",
-        type: "AI/ML",
-        images: ["/images/project-f.png"],
-        tech: ["Python", "PyTorch", "AWS"],
-        desc: "Machine learning pipeline for predictive maintenance analysis.",
-        date: "2024-03-12"
+        title: "Chakka Origins",
+        type: "Website",
+        images: ["/images/projects/chakka/1.png", "/images/projects/chakka/2.png"],
+        tech: ["Sveltekit", "Tailwind", "Firebase", "Express"],
+        desc: "a shopping website for a company specializing in biodiverse Ethiopian natural products ,sustainably sourced from forest farmers, complete with delivery system and payment integration",
+        date: "2024-03-12",
+        live: "https://www.chakkaorigins.com/",
     },
     {
         id: 7,
-        title: "Secure Omega",
-        type: "Security",
-        images: ["/images/project-g.png"],
-        tech: ["Rust", "Wasm", "OpenSSL"],
-        desc: "End-to-end encrypted messaging service with zero-knowledge proof.",
-        date: "2024-04-01"
+        title: "Murder Mystry portfolio",
+        type: "Website",
+        images: ["/images/projects/portfolio/1.png", "/images/projects/portfolio/2.png"],
+        tech: ["NextJs", "Tailwind"],
+        desc: "This website",
+        date: "2026-01-30",
+        live: "https://solocodes.dev",
+        github: "https://github.com/brooksolomon/portfolio"
     },
     {
         id: 8,
