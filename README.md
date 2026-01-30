@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Case #404: The Developer
+
+> An unsolved mystery portfolio.  
+> **Solo Codes** — Brook Solomon
+
+A themed portfolio built as a crime-scene investigation: red strings, polaroids, evidence boards, and a suspect profile. Fully responsive with a custom cursor (desktop), hamburger nav (mobile), and the same artifact components in a list-on-mobile layout.
+
+**Live:** [solocodes.dev](https://solocodes.dev)
+
+---
+
+## Features
+
+- **Crime Scene** — Hub with CASE #404 title and artifact links (Polaroid, Sticky Note, MO card, Evidence folder)
+- **Suspect** — Profile page (mugshot, bio, psychological analysis, digital footprint)
+- **Evidence** — Project gallery with search, tech filters, and detail modals
+- **Modus Operandi** — Skills as “weapons” and “tactical assets” with linked evidence
+- **Timeline** — Career chronology + GitHub contribution heatmap
+
+**UI:** Custom cursor (magnifying glass), red strings (Framer Motion), crime tape, cork/paper textures, responsive nav (tabs on desktop, hamburger + dropdown on mobile).
+
+---
+
+## Tech Stack
+
+| Category   | Stack |
+|-----------|--------|
+| Framework | [Next.js](https://nextjs.org) 16 (App Router) |
+| UI        | [React](https://react.dev) 19, [Tailwind CSS](https://tailwindcss.com) 4 |
+| Motion    | [Framer Motion](https://www.framer.com/motion/) |
+| Icons     | [Lucide React](https://lucide.dev) |
+| Other     | [react-github-calendar](https://github.com/grubersjoe/react-github-calendar), TypeScript |
+
+---
 
 ## Getting Started
 
-First, run the development server:
+**Prerequisites:** Node.js 18+
 
 ```bash
+# Clone and install
+git clone https://github.com/brooksolomon/portfolio.git
+cd portfolio
+npm install
+
+# Run dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Scripts:**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command        | Description        |
+|----------------|--------------------|
+| `npm run dev`  | Start dev server   |
+| `npm run build`| Production build   |
+| `npm run start`| Run production app |
+| `npm run lint` | Run ESLint         |
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+portfolio/
+├── app/
+│   ├── layout.tsx          # Root layout, fonts, bg decor
+│   ├── page.tsx            # Crime scene (home)
+│   ├── suspect/page.tsx     # Profile
+│   ├── evidence/page.tsx   # Projects
+│   ├── modus-operandi/     # Skills
+│   └── timeline/page.tsx   # Experience + GitHub heatmap
+├── components/
+│   ├── Navigation.tsx      # Tabs (desktop) / hamburger (mobile)
+│   ├── CustomCursor.tsx    # Magnifying-glass cursor (pointer devices only)
+│   └── ui/
+│       ├── Polaroid.tsx
+│       ├── StickyNote.tsx
+│       ├── RedString.tsx   # Animated red thread
+│       ├── CrimeTape.tsx
+│       └── GithubHeatmap.tsx
+├── lib/utils.ts
+└── public/images/          # Profile + project assets
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Private / personal portfolio. All rights reserved.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+*“Every build is a calculated strike. Every line is a trace left behind.”*  
+— Modus Operandi

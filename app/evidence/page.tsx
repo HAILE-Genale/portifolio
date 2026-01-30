@@ -29,7 +29,7 @@ const EVIDENCE: Project[] = [
         desc: "mobile app that automatically tracks your bank transactions by parsing SMS messages from Ethiopian banks. It gives you real-time balance updates, detailed transaction history, smart analytics, and clear financial insights, all stored securely on your device.",
         date: "2025-12-15",
 
-        live: "https://totals-app.vercel.app"
+        live: "https://totals.detached.space"
     },
     {
         id: 2,
