@@ -5,6 +5,7 @@ import { useState } from "react";
 import { StickyNote } from "@/components/ui/StickyNote";
 import { Polaroid } from "@/components/ui/Polaroid";
 import Link from "next/link";
+import { CrimeTape } from "@/components/ui/CrimeTape";
 import { RedString } from "@/components/ui/RedString";
 
 export default function Home() {
@@ -60,14 +61,13 @@ export default function Home() {
 
       {/* --- EXTRA CRIME SCENE ELEMENTS --- */}
 
-      {/* Top Center - Crime Scene Tape (Full viewport container) */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-80">
-        <div className="absolute top-1/4 -left-10 w-[120%] h-12 bg-yellow-400 border-y-2 border-black -rotate-6 flex items-center justify-around font-mono text-black font-black text-sm tracking-tighter whitespace-nowrap shadow-2xl">
-          {[...Array(12)].map((_, i) => (
-            <span key={i}>POLICE LINE - DO NOT CROSS - CRIME SCENE - </span>
-          ))}
-        </div>
-      </div>
+      {/* Crime Scene Tapes */}
+      <CrimeTape
+        yPercent={22}
+        rotation={-6}
+        delay={1}
+        tension={hoveredArtifact ? 0.6 : 0}
+      />
 
       {/* Bottom Center - Chalk Outline & Evidence Pool */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[600px] pointer-events-none overflow-visible flex items-center justify-center">
