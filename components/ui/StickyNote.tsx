@@ -22,12 +22,12 @@ export function StickyNote({
             whileHover={{ scale: 1.05 }}
             initial={{ rotate: rotation }}
             className={cn(
-                "p-4 shadow-md text-black font-hand text-lg w-48 h-48 flex items-center justify-center text-center",
+                "p-6 shadow-md text-black font-hand text-lg min-w-[200px] min-h-[200px] flex flex-col items-start justify-start text-left",
                 color,
                 className
             )}
         >
-            <div className="opacity-90 leading-tight">
+            <div className="opacity-90 leading-tight w-full">
                 {children}
             </div>
         </motion.div>
