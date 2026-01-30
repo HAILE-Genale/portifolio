@@ -1,12 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { StickyNote } from "@/components/ui/StickyNote";
 import { Polaroid } from "@/components/ui/Polaroid";
 import Link from "next/link";
 import { RedString } from "@/components/ui/RedString";
 
 export default function Home() {
+  const [hoveredArtifact, setHoveredArtifact] = useState<string | null>(null);
+
   return (
     <div className="relative w-full min-h-[calc(100vh-80px)] overflow-hidden flex items-center justify-center p-4">
       {/* Background Decor */}
@@ -17,6 +20,8 @@ export default function Home() {
         className="z-20 text-center relative pointer-events-auto cursor-pointer"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
+        onMouseEnter={() => setHoveredArtifact("hub")}
+        onMouseLeave={() => setHoveredArtifact(null)}
         whileHover={{ scale: 1.02, rotate: 1 }}
         transition={{ duration: 1, type: "spring", stiffness: 100 }}
       >
@@ -94,7 +99,10 @@ export default function Home() {
       {/* --- ARTIFACTS --- */}
 
       {/* 1. Suspect Profile (Top Left) */}
-      <div className="absolute top-12 left-4 md:top-20 md:left-20 z-10">
+      <div className="absolute top-12 left-4 md:top-20 md:left-20 z-10"
+        onMouseEnter={() => setHoveredArtifact("suspect")}
+        onMouseLeave={() => setHoveredArtifact(null)}
+      >
         <Link href="/suspect">
           <Polaroid
             src="/images/brook.png"
@@ -113,7 +121,10 @@ export default function Home() {
       </div>
 
       {/* 2. Timeline (Top Right) */}
-      <div className="absolute top-12 right-4 md:top-24 md:right-24 z-10">
+      <div className="absolute top-12 right-4 md:top-24 md:right-24 z-10"
+        onMouseEnter={() => setHoveredArtifact("timeline")}
+        onMouseLeave={() => setHoveredArtifact(null)}
+      >
         <Link href="/timeline">
           <StickyNote rotation={4} className="w-40 h-40 md:w-48 md:h-48 cursor-pointer hover:z-50 transition-transform duration-300 hover:scale-110 shadow-2xl">
             <span className="font-display text-xl text-red-800">TIMELINE OF<br />EVENTS</span>
@@ -123,7 +134,10 @@ export default function Home() {
       </div>
 
       {/* 3. Skills / MO (Bottom Left) */}
-      <div className="absolute bottom-20 left-4 md:bottom-32 md:left-32 z-10">
+      <div className="absolute bottom-20 left-4 md:bottom-32 md:left-32 z-10"
+        onMouseEnter={() => setHoveredArtifact("mo")}
+        onMouseLeave={() => setHoveredArtifact(null)}
+      >
         <Link href="/modus-operandi">
           <motion.div
             whileHover={{ scale: 1.15, rotate: 6, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" }}
@@ -136,7 +150,10 @@ export default function Home() {
       </div>
 
       {/* 4. Evidence (Bottom Right) */}
-      <div className="absolute bottom-20 right-4 md:bottom-32 md:right-32 z-10">
+      <div className="absolute bottom-20 right-4 md:bottom-32 md:right-32 z-10"
+        onMouseEnter={() => setHoveredArtifact("evidence")}
+        onMouseLeave={() => setHoveredArtifact(null)}
+      >
         <Link href="/evidence">
           <motion.div
             whileHover={{ scale: 1.1, rotate: -4, y: -10 }}
@@ -153,16 +170,28 @@ export default function Home() {
       <div className="absolute inset-0 pointer-events-none hidden md:block">
         {/* Strings connected to center hub (50/50) */}
         {/* Suspect (centered at roughly 18/28) */}
-        <RedString x1Percent={16} y1Percent={28} x2Percent={50} y2Percent={50} delay={0.5} />
+        <RedString
+          x1Percent={16} y1Percent={28} x2Percent={50} y2Percent={50} delay={0.5}
+          tension={hoveredArtifact === "suspect" || hoveredArtifact === "hub" ? 1 : 0}
+        />
 
         {/* Timeline (centered at roughly 83/30) */}
-        <RedString x1Percent={87} y1Percent={32} x2Percent={50} y2Percent={50} delay={0.7} />
+        <RedString
+          x1Percent={87} y1Percent={32} x2Percent={50} y2Percent={50} delay={0.7}
+          tension={hoveredArtifact === "timeline" || hoveredArtifact === "hub" ? 1 : 0}
+        />
 
         {/* Modus Operandi (centered at roughly 20/75) */}
-        <RedString x1Percent={20} y1Percent={76} x2Percent={50} y2Percent={50} delay={0.9} />
+        <RedString
+          x1Percent={20} y1Percent={76} x2Percent={50} y2Percent={50} delay={0.9}
+          tension={hoveredArtifact === "mo" || hoveredArtifact === "hub" ? 1 : 0}
+        />
 
         {/* Evidence (centered at roughly 80/75) */}
-        <RedString x1Percent={82} y1Percent={76} x2Percent={50} y2Percent={50} delay={1.1} />
+        <RedString
+          x1Percent={82} y1Percent={76} x2Percent={50} y2Percent={50} delay={1.1}
+          tension={hoveredArtifact === "evidence" || hoveredArtifact === "hub" ? 1 : 0}
+        />
       </div>
 
     </div>

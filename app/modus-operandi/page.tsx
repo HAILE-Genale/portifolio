@@ -724,6 +724,7 @@ export default function ModusOperandi() {
                             y1Percent={50}
                             x2Percent={80}
                             y2Percent={75}
+                            tension={0.8}
                         />
                     )}
                     {activeId && (activeId === "swift") && (
@@ -732,6 +733,7 @@ export default function ModusOperandi() {
                             y1Percent={50}
                             x2Percent={80}
                             y2Percent={85}
+                            tension={0.8}
                         />
                     )}
                 </AnimatePresence>
