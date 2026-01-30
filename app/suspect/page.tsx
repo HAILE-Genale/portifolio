@@ -11,7 +11,7 @@ export default function SuspectPage() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white text-black p-4 sm:p-6 md:p-8 shadow-2xl relative rotate-1"
+                className="bg-white text-black p-4 sm:p-6 md:p-8 shadow-2xl relative rotate-1 overflow-hidden"
                 style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/aged-paper.png')" }} // Optional paper texture
             >
                 {/* Header */}
@@ -107,9 +107,9 @@ export default function SuspectPage() {
                     </div>
                 </div>
 
-                {/* Footer Stamps */}
-                <div className="mt-6 sm:mt-8 flex justify-end space-x-4 overflow-x-hidden">
-                    <div className="border-2 sm:border-4 border-red-700 text-red-700 font-black text-2xl sm:text-4xl p-2 opacity-50 -rotate-12 select-none">
+                {/* Footer Stamps - no overflow so desktop doesn't get a scrollbar */}
+                <div className="mt-6 sm:mt-8 flex justify-end space-x-4">
+                    <div className="border-2 sm:border-4 border-red-700 text-red-700 font-black text-2xl sm:text-4xl p-2 opacity-50 -rotate-12 select-none shrink-0">
                         CONFIDENTIAL
                     </div>
                 </div>
