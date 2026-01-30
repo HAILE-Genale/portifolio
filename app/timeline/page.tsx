@@ -2,14 +2,14 @@
 
 import { motion } from "framer-motion";
 import { GithubHeatmap } from "@/components/ui/GithubHeatmap";
-import { Terminal, Activity, Database, ShieldAlert, Monitor } from "lucide-react";
+import { Terminal, Activity, ShieldAlert, Monitor, Fingerprint } from "lucide-react";
 
 const TIMELINE = [
-    { year: "NOW", event: "The Current Suspect", desc: "Building independent projects and seeking new challenges.", status: "ACTIVE", type: "CRITICAL" },
-    { year: "2023", event: "Senior Developer", desc: "Led a team of 5. Shipped production code to 1M+ users.", status: "RESOLVED", type: "MAJOR" },
-    { year: "2021", event: "Computer Science Degree", desc: "Enrolled in University. Learned the theory behind the madness.", status: "COMPLETED", type: "INTEL" },
-    { year: "2019", event: "First Freelance Gig", desc: "Built a WordPress site for a local bakery. Paid in croissants.", status: "ARCHIVED", type: "MINOR" },
-    { year: "2018", event: "Discovered Programming", desc: "First encounter with Python. The obsession began.", status: "ARCHIVED", type: "ORIGIN" },
+    { date: "JAN 2026", event: "The Current Suspect", desc: "Building independent projects and seeking new challenges.", status: "ACTIVE", type: "CRITICAL" },
+    { date: "OCT 2023", event: "Senior Developer", desc: "Led a team of 5. Shipped production code to 1M+ users.", status: "RESOLVED", type: "MAJOR" },
+    { date: "SEP 2021", event: "Computer Science Degree", desc: "Enrolled in University. Learned the theory behind the madness.", status: "COMPLETED", type: "INTEL" },
+    { date: "MAR 2019", event: "First Freelance Gig", desc: "Built a WordPress site for a local bakery. Paid in croissants.", status: "ARCHIVED", type: "MINOR" },
+    { date: "JUN 2018", event: "Discovered Programming", desc: "First encounter with Python. The obsession began.", status: "ARCHIVED", type: "ORIGIN" },
 ];
 
 export default function TimelinePage() {
@@ -46,59 +46,66 @@ export default function TimelinePage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative pb-20">
 
                 {/* Left Column: History Log (3/12 - 25%) */}
-                <aside className="lg:col-span-3 space-y-6">
-                    <div className="border-l-2 border-accent-red pl-4 mb-8">
-                        <h2 className="text-lg font-display text-paper-yellow uppercase tracking-tight">Access Logs</h2>
+                <aside className="lg:col-span-3 space-y-6 relative">
+                    {/* The Red String (Vertical Line) */}
+                    <div className="absolute left-0 top-0 bottom-0 w-px bg-red-600/60 z-0 shadow-[0_0_10px_rgba(255,0,0,0.3)]" />
+
+                    <div className="border-l-4 border-accent-red pl-4 mb-10">
+                        <h2 className="text-xl font-display text-paper-yellow uppercase tracking-tight">Access Logs</h2>
                         <p className="font-mono text-[9px] text-gray-500 uppercase tracking-widest">Temporal Sequence</p>
                     </div>
 
-                    <div className="relative space-y-4">
+                    <div className="relative space-y-8 pl-6">
                         {TIMELINE.map((item, index) => (
                             <motion.div
-                                key={item.year}
+                                key={item.date}
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                 whileHover={{ x: 4 }}
-                                className="group relative bg-[#121212] border border-white/5 p-4 transition-all hover:border-accent-red/30 hover:bg-accent-red/5 cursor-default"
+                                className="group relative bg-[#121212] border border-white/5 p-5 transition-all hover:border-accent-red/30 hover:bg-accent-red/5 cursor-default z-10 shadow-lg"
                             >
-                                <div className="flex justify-between items-start mb-2">
+                                {/* Connection Line to String */}
+                                <div className="absolute left-[-24px] top-1/2 w-6 h-px bg-red-600/40 group-hover:bg-red-600 transition-colors" />
+
+                                <div className="flex justify-between items-start mb-3">
                                     <span className={`font-mono text-[9px] px-1.5 py-0.5 rounded ${item.status === 'ACTIVE' ? 'bg-green-500/10 text-green-500' : 'bg-white/5 text-gray-500'
                                         }`}>
                                         {item.status}
                                     </span>
-                                    <span className="font-mono text-[9px] text-accent-red opacity-50">{item.year}</span>
+                                    <span className="font-display text-lg text-red-500 font-bold tracking-tighter drop-shadow-[0_0_8px_rgba(255,0,0,0.6)]">
+                                        {item.date}
+                                    </span>
                                 </div>
 
-                                <h3 className="text-white font-display text-sm uppercase tracking-wider mb-1 group-hover:text-accent-red transition-colors">
+                                <h3 className="text-white font-display text-base uppercase tracking-wider mb-2 group-hover:text-accent-red transition-colors leading-none">
                                     {item.event}
                                 </h3>
 
-                                <p className="text-gray-500 font-sans text-[11px] leading-relaxed line-clamp-2 italic">
+                                <p className="text-gray-500 font-sans text-xs leading-relaxed italic opacity-80">
                                     "{item.desc}"
                                 </p>
 
                                 {/* ID Ticker */}
-                                <div className="mt-3 pt-2 border-t border-white/5 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <span className="font-mono text-[8px] text-gray-600">REF:00{index + 1}</span>
-                                    <span className="font-mono text-[8px] text-gray-600">TYPE:{item.type}</span>
+                                <div className="mt-4 pt-2 border-t border-white/5 flex justify-between items-center opacity-40 group-hover:opacity-100 transition-opacity">
+                                    <span className="font-mono text-[8px] text-gray-600 uppercase">REF:00{index + 1}</span>
+                                    <span className="font-mono text-[8px] text-gray-600 uppercase tracking-tighter">TYPE:{item.type}</span>
                                 </div>
 
                                 {/* Active Pulse Indicator */}
                                 {item.status === 'ACTIVE' && (
-                                    <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-4 bg-accent-red shadow-[0_0_10px_rgba(139,0,0,0.5)]" />
+                                    <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-6 bg-accent-red shadow-[0_0_15px_rgba(139,0,0,1)] z-20" />
                                 )}
                             </motion.div>
                         ))}
                     </div>
 
-                    {/* Meta Data Footer for Sidebar */}
-                    <div className="pt-8 opacity-20 hidden lg:block">
-                        <div className="font-mono text-[9px] text-gray-500 space-y-1">
-                            <p>// End of Stream</p>
-                            <p>// Buffer cleared</p>
-                            <p>// System ready...</p>
+                    <div className="pt-12 opacity-10 hidden lg:block filter grayscale">
+                        <Fingerprint className="w-16 h-16 text-white" />
+                        <div className="font-mono text-[8px] text-gray-500 mt-2 space-y-1 uppercase tracking-widest">
+                            <p>Authorized access only</p>
+                            <p>Tracking enabled</p>
                         </div>
                     </div>
                 </aside>
@@ -108,97 +115,89 @@ export default function TimelinePage() {
 
                     {/* Activity Monitor Section */}
                     <section className="relative">
-                        <div className="flex items-center justify-between mb-4 px-2">
+                        <div className="flex items-center justify-between mb-6 px-2">
                             <div className="flex items-center gap-3">
-                                <Activity className="w-4 h-4 text-accent-red animate-pulse" />
-                                <h2 className="text-2xl font-display text-white uppercase tracking-tighter italic">Live Surveillance Feed</h2>
+                                <Activity className="w-5 h-5 text-accent-red animate-pulse" />
+                                <h2 className="text-3xl font-display text-white uppercase tracking-tighter italic">Live Surveillance Feed</h2>
                             </div>
                             <div className="flex gap-4">
-                                <div className="flex items-center gap-2 border border-white/10 px-3 py-1 bg-black/40">
-                                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
-                                    <span className="font-mono text-[10px] text-gray-400 uppercase">Uplink: Stable</span>
+                                <div className="hidden sm:flex items-center gap-2 border border-white/10 px-4 py-1.5 bg-black/40 rounded-sm">
+                                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                                    <span className="font-mono text-[10px] text-gray-400 uppercase tracking-widest">Uplink: Stable</span>
                                 </div>
-                                <div className="flex items-center gap-2 border border-white/10 px-3 py-1 bg-black/40">
-                                    <Monitor className="w-3 h-3 text-gray-400" />
-                                    <span className="font-mono text-[10px] text-gray-400 uppercase">V_Source: GitHub</span>
+                                <div className="flex items-center gap-2 border border-white/10 px-4 py-1.5 bg-black/40 rounded-sm">
+                                    <Monitor className="w-3.5 h-3.5 text-gray-400" />
+                                    <span className="font-mono text-[10px] text-gray-400 uppercase tracking-widest">GitHub_Uptime</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-[#0a0a0a] border border-white/10 p-10 relative overflow-hidden shadow-2xl">
+                        <div className="bg-[#0a0a0a] border border-white/10 p-4 md:py-12 md:px-4 relative overflow-hidden shadow-2xl rounded-sm">
                             {/* Scanning Line UI Decoration */}
                             <motion.div
                                 animate={{ top: ["0%", "100%"] }}
-                                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                                className="absolute left-0 right-0 h-[1px] bg-accent-red/20 z-0 pointer-events-none"
+                                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                                className="absolute left-0 right-0 h-[2px] bg-accent-red/30 z-20 pointer-events-none blur-[1px]"
                             />
 
                             {/* Heatmap Container */}
-                            <div className="relative z-10 w-full flex justify-center py-8 bg-[#111]/50 backdrop-blur-sm border border-white/5 rounded-sm">
+                            <div className="relative z-10 w-full flex justify-center py-12 md:py-20 bg-[#080808] backdrop-blur-md border border-white/5 shadow-inner min-h-[400px]">
                                 <GithubHeatmap username="brooksolomon" />
+
+                                {/* Corner Brackets for Scanner look */}
+                                <div className="absolute top-4 left-4 w-10 h-10 border-t-2 border-l-2 border-accent-red/20" />
+                                <div className="absolute top-4 right-4 w-10 h-10 border-t-2 border-r-2 border-accent-red/20" />
+                                <div className="absolute bottom-4 left-4 w-10 h-10 border-b-2 border-l-2 border-accent-red/20" />
+                                <div className="absolute bottom-4 right-4 w-10 h-10 border-b-2 border-r-2 border-accent-red/20" />
                             </div>
 
-                            {/* Data Overlays */}
-                            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div className="bg-black/60 border border-white/5 p-4 font-mono">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <Database className="w-3 h-3 text-accent-red" />
-                                        <span className="text-[10px] text-gray-500 uppercase">Core_Data</span>
+                            {/* Replaced Cards with Investigation Summary */}
+                            <div className="mt-8 grid grid-cols-1 lg:grid-cols-4 gap-8">
+                                <div className="lg:col-span-3 bg-accent-red/[0.03] border border-accent-red/20 p-8 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group rounded-sm">
+                                    <div className="relative z-10">
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <ShieldAlert className="w-4 h-4 text-accent-red" />
+                                            <h3 className="text-accent-red font-display text-2xl uppercase italic tracking-tighter">Investigation Summary</h3>
+                                        </div>
+                                        <p className="text-gray-400 font-sans text-sm leading-relaxed max-w-2xl uppercase font-bold tracking-wide mb-2 opacity-90">
+                                            The subject exhibits highly focused creative output. Contribution frequency remains consistent
+                                            throughout operational hours. No significant security breaches reported.
+                                        </p>
+                                        <div className="flex items-center gap-2 mt-4">
+                                            <span className="text-white text-xs font-mono bg-accent-red px-2 py-0.5">STATUS:</span>
+                                            <span className="text-white text-xs font-mono animate-pulse">UNDER CONTINUOUS MONITORING</span>
+                                        </div>
                                     </div>
-                                    <div className="text-lg text-white font-display">OPTIMIZED</div>
-                                    <p className="text-[9px] text-gray-600 mt-1 uppercase">Node clusters operational at 100% capacity.</p>
+
+                                    <div className="flex-shrink-0 relative z-10">
+                                        <div className="w-28 h-28 border-4 border-accent-red/30 flex items-center justify-center p-3 opacity-60 group-hover:opacity-100 transition-opacity rotate-3">
+                                            <div className="w-full h-full bg-accent-red/20 flex flex-col items-center justify-center text-accent-red font-black text-sm text-center leading-none">
+                                                <span>TOP</span>
+                                                <span>SECRET</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Background stylized numbers */}
+                                    <div className="absolute inset-0 pointer-events-none text-white opacity-[0.03] font-mono text-6xl flex items-center justify-around select-none overflow-hidden">
+                                        <span>0101</span><span>1010</span><span>1100</span>
+                                    </div>
                                 </div>
 
-                                <div className="bg-black/60 border border-white/5 p-4 font-mono">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <ShieldAlert className="w-3 h-3 text-yellow-500" />
-                                        <span className="text-[10px] text-gray-500 uppercase">Threat_Analysis</span>
-                                    </div>
-                                    <div className="text-lg text-yellow-500 font-display">ELEVATED</div>
-                                    <p className="text-[9px] text-gray-600 mt-1 uppercase">Rapid code injection detected in multiple sectors.</p>
-                                </div>
+                                <div className="lg:col-span-1 bg-black/40 border border-white/10 p-8 flex flex-col justify-center items-center text-center relative rounded-sm group">
+                                    <Terminal className="w-8 h-8 text-green-500 mb-4 opacity-50 group-hover:opacity-100 transition-opacity" />
+                                    <div className="font-display text-white text-lg tracking-widest mb-1">DATA_SECURE</div>
+                                    <div className="font-mono text-[9px] text-gray-500 uppercase">Verification Hash: 0xF72A</div>
 
-                                <div className="bg-black/60 border border-white/5 p-4 font-mono relative overflow-hidden group">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <Terminal className="w-3 h-3 text-green-500" />
-                                        <span className="text-[10px] text-gray-500 uppercase">Kernel_Status</span>
-                                    </div>
-                                    <div className="text-lg text-green-500 font-display">RUNNING</div>
-                                    <p className="text-[9px] text-gray-600 mt-1 uppercase group-hover:text-green-500 transition-colors">Process ID: PID_SOLO_992</p>
-
-                                    {/* Small Ticker Decoration */}
-                                    <div className="absolute -bottom-2 -right-2 text-[20px] font-black opacity-5 select-none pointer-events-none group-hover:opacity-10 transition-opacity">
-                                        EXEC_
+                                    <div className="absolute top-2 right-2 flex gap-1">
+                                        <div className="w-1 h-3 bg-accent-red/30" />
+                                        <div className="w-1 h-3 bg-accent-red/50" />
+                                        <div className="w-1 h-3 bg-accent-red" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
-
-                    {/* Detailed Analysis Footer */}
-                    <div className="bg-accent-red/5 border border-accent-red/20 p-6 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative group">
-                        <div className="relative z-10">
-                            <h3 className="text-accent-red font-display text-xl uppercase italic tracking-tighter mb-1">Investigation Summary</h3>
-                            <p className="text-gray-400 font-sans text-xs leading-relaxed max-w-2xl uppercase font-bold tracking-wide">
-                                The subject exhibits highly focused creative output. Contribution frequency remains consistent
-                                throughout operational hours. No significant security breaches reported. Status: <span className="text-white">UNDER CONTINUOUS MONITORING</span>.
-                            </p>
-                        </div>
-
-                        <div className="flex-shrink-0 relative z-10">
-                            <div className="w-24 h-24 border-4 border-accent-red/30 flex items-center justify-center p-2 opacity-50 group-hover:opacity-100 transition-opacity">
-                                <div className="w-full h-full bg-accent-red/20 flex flex-col items-center justify-center text-accent-red font-black text-xs text-center leading-none">
-                                    <span>TOP</span>
-                                    <span>SECRET</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Background stylized numbers */}
-                        <div className="absolute inset-0 pointer-events-none text-white opacity-[0.02] font-mono text-5xl flex items-center justify-around select-none">
-                            <span>0101</span><span>1010</span><span>1100</span><span>0011</span>
-                        </div>
-                    </div>
                 </main>
 
             </div>
