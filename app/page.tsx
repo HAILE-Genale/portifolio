@@ -59,20 +59,55 @@ export default function Home() {
         </div>
       </motion.div>
 
-      {/* Mobile: grid of links below title (replaces overlapping absolute artifacts) */}
-      <div className="md:hidden grid grid-cols-2 gap-3 mt-8 px-2 max-w-md mx-auto w-full z-20">
-        <Link href="/suspect" className="bg-white/90 text-black p-4 rounded-lg border-2 border-gray-300 font-display text-sm uppercase tracking-wider text-center shadow-lg active:scale-[0.98]">
-          THE SUSPECT
-        </Link>
-        <Link href="/timeline" className="bg-[#f4e4bc]/95 text-red-900 p-4 rounded-lg border-2 border-amber-800/30 font-display text-sm uppercase tracking-wider text-center shadow-lg active:scale-[0.98]">
-          TIMELINE
-        </Link>
-        <Link href="/modus-operandi" className="bg-[#e0e0e0] text-black p-4 rounded-lg border-l-4 border-blue-800 border-2 border-gray-300 font-display text-sm uppercase tracking-wider text-center shadow-lg active:scale-[0.98]">
-          MODUS OPERANDI
-        </Link>
-        <Link href="/evidence" className="bg-[#d4c598] text-red-900 p-4 rounded-lg border-2 border-amber-900/30 font-display text-sm uppercase tracking-wider text-center shadow-lg active:scale-[0.98]">
-          EVIDENCE
-        </Link>
+      {/* Mobile: same components in a list, connected with strings */}
+      <div className="md:hidden relative mt-10 pb-16 px-6 max-w-md mx-auto w-full z-20">
+        {/* Vertical red strings connecting the list (viewport % so SVG overlays full screen) */}
+        <div className="absolute inset-0 pointer-events-none">
+          <RedString x1Percent={10} y1Percent={26} x2Percent={10} y2Percent={42} delay={0.3} tension={0} />
+          <RedString x1Percent={10} y1Percent={42} x2Percent={10} y2Percent={58} delay={0.5} tension={0} />
+          <RedString x1Percent={10} y1Percent={58} x2Percent={10} y2Percent={74} delay={0.7} tension={0} />
+          <RedString x1Percent={10} y1Percent={74} x2Percent={10} y2Percent={90} delay={0.9} tension={0} />
+        </div>
+
+        <div className="relative flex flex-col gap-8 pl-8">
+          <Link href="/suspect" className="block" onMouseEnter={() => setHoveredArtifact("suspect")} onMouseLeave={() => setHoveredArtifact(null)}>
+            <Polaroid
+              src="/images/brook.png"
+              alt="Suspect"
+              caption="THE SUSPECT"
+              rotation={-4}
+              className="w-[200px] sm:w-[240px] hover:z-50 cursor-pointer"
+            />
+          </Link>
+
+          <Link href="/timeline" className="block" onMouseEnter={() => setHoveredArtifact("timeline")} onMouseLeave={() => setHoveredArtifact(null)}>
+            <StickyNote rotation={2} className="w-36 h-36 sm:w-40 sm:h-40 cursor-pointer hover:z-50 transition-transform duration-300 active:scale-105 shadow-2xl ml-4">
+              <span className="font-display text-lg text-red-800">TIMELINE OF<br />EVENTS</span>
+              <p className="text-xs mt-2 font-mono text-gray-600 uppercase tracking-widest opacity-60">Historical Record</p>
+            </StickyNote>
+          </Link>
+
+          <Link href="/modus-operandi" className="block" onMouseEnter={() => setHoveredArtifact("mo")} onMouseLeave={() => setHoveredArtifact(null)}>
+            <motion.div
+              whileTap={{ scale: 1.05 }}
+              className="bg-[#e0e0e0] w-full max-w-[240px] h-24 border-l-8 border-blue-800 p-4 shadow-xl cursor-pointer flex flex-col justify-center items-center rotate-1 border border-gray-300 ml-2"
+            >
+              <span className="font-display text-lg text-black leading-none text-center">MODUS<br />OPERANDI</span>
+              <span className="text-[10px] font-mono mt-1 text-gray-500 uppercase tracking-[0.2em]">Methods</span>
+            </motion.div>
+          </Link>
+
+          <Link href="/evidence" className="block" onMouseEnter={() => setHoveredArtifact("evidence")} onMouseLeave={() => setHoveredArtifact(null)}>
+            <motion.div
+              whileTap={{ scale: 1.02 }}
+              className="relative w-full max-w-[260px] h-28 sm:h-32 bg-[#d4c598] rounded-lg shadow-2xl flex items-center justify-center cursor-pointer group -rotate-1 border border-black/20 ml-4"
+            >
+              <div className="absolute -top-4 left-0 w-16 h-6 bg-[#d4c598] rounded-t-lg border-t border-l border-r border-black/20 shadow-sm" />
+              <span className="text-red-900 font-display text-xl font-bold tracking-widest z-10 drop-shadow-sm">EVIDENCE</span>
+              <div className="absolute top-2 right-4 w-32 h-24 bg-white/90 shadow-sm rotate-3 group-hover:rotate-12 transition-transform duration-500 z-0 border border-black/5" />
+            </motion.div>
+          </Link>
+        </div>
       </div>
 
       {/* --- EXTRA CRIME SCENE ELEMENTS --- */}
