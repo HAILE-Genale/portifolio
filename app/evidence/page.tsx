@@ -91,7 +91,7 @@ const EVIDENCE: Project[] = [
         tech: ["NextJs", "Tailwind"],
         desc: "This website",
         date: "2026-01-30",
-        live: "https://solocodes.dev",
+        live: "https://portfolio-p1qc5js09-haile-genales-projects.vercel.app",
         github: "#"
     },
     {
