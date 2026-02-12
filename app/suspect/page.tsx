@@ -86,7 +86,7 @@ export default function SuspectPage() {
                         <div className="space-y-4 pt-4">
                             <h3 className="font-display text-xl sm:text-2xl border-b border-black inline-block uppercase tracking-widest text-red-900">Digital Footprint</h3>
                             <div className="flex flex-wrap gap-2">
-                                <a href="#" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] text-white px-2 py-1.5 flex items-center gap-1.5 hover:bg-red-900 transition-colors border border-black shadow-[2px_2px_0px_#000]">
+                                <a href="https://github.com/HAILE-Genale" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] text-white px-2 py-1.5 flex items-center gap-1.5 hover:bg-red-900 transition-colors border border-black shadow-[2px_2px_0px_#000]">
                                     <Github className="w-3.5 h-3.5" />
                                     <span className="font-mono text-[10px]">GITHUB.EXE</span>
                                 </a>
