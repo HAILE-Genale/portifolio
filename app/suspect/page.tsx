@@ -90,7 +90,7 @@ export default function SuspectPage() {
                                     <Github className="w-3.5 h-3.5" />
                                     <span className="font-mono text-[10px]">GITHUB.EXE</span>
                                 </a>
-                                <a href="#" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] text-white px-2 py-1.5 flex items-center gap-1.5 hover:bg-red-900 transition-colors border border-black shadow-[2px_2px_0px_#000]">
+                                <a href="https://t.me/haile_sync" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] text-white px-2 py-1.5 flex items-center gap-1.5 hover:bg-red-900 transition-colors border border-black shadow-[2px_2px_0px_#000]">
                                     <Linkedin className="w-3.5 h-3.5" />
                                     <span className="font-mono text-[10px]">LINKEDIN.COM</span>
                                 </a>
