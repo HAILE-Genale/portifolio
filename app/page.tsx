@@ -45,7 +45,7 @@ export default function Home() {
           </h1>
           <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-accent-red to-transparent mb-4 opacity-50" />
           <h2 className="text-base sm:text-xl md:text-2xl font-display text-paper-yellow opacity-90 tracking-[0.15em] sm:tracking-[0.2em] uppercase px-1">
-            SOLO CODES : THE DEVELOPER
+            HAILE GENALE : THE DEVELOPER
           </h2>
 
           {/* "Classified" stamp - hidden on very small screens to avoid overflow */}
@@ -72,7 +72,7 @@ export default function Home() {
         <div className="relative flex flex-col gap-8 pl-8">
           <Link href="/suspect" className="block" onMouseEnter={() => setHoveredArtifact("suspect")} onMouseLeave={() => setHoveredArtifact(null)}>
             <Polaroid
-              src="/images/brook.png"
+              src="/images/profile.png"
               alt="Suspect"
               caption="THE SUSPECT"
               rotation={-4}
@@ -158,7 +158,7 @@ export default function Home() {
       >
         <Link href="/suspect">
           <Polaroid
-            src="/images/brook.png"
+            src="/images/profile.png"
             alt="Suspect"
             caption="THE SUSPECT"
             rotation={-6}
@@ -250,3 +250,4 @@ export default function Home() {
     </div>
   );
 }
+

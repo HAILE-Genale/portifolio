@@ -60,7 +60,7 @@ const EVIDENCE: Project[] = [
         desc: "connect and directly access your phone storage from the web on MacOs without any installs.",
         date: "2024-02-05",
         live: "https://webmtp.detached.space",
-        github: "https://github.com/detached-space/webmtp"
+        github: "#"
     },
     {
         id: 5,
@@ -71,7 +71,7 @@ const EVIDENCE: Project[] = [
         desc: "Ora is an open-source macOS browser built with Swift and WebKit. Fast, secure, and native Arc alternative that puts users first with smooth tab management, spaces, vertical sidebar, and many more.",
         date: "2025-09-08",
         live: "https://www.orabrowser.com/",
-        github: "https://github.com/the-ora/browser"
+        github: "#"
     },
     {
         id: 6,
@@ -92,7 +92,7 @@ const EVIDENCE: Project[] = [
         desc: "This website",
         date: "2026-01-30",
         live: "https://solocodes.dev",
-        github: "https://github.com/brooksolomon/portfolio"
+        github: "#"
     },
     {
         id: 8,
@@ -600,3 +600,4 @@ function EvidenceContent() {
         </div>
     );
 }
+

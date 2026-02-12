@@ -30,9 +30,9 @@ export default function SuspectPage() {
                     {/* Mugshot Section */}
                     <div className="col-span-1 flex flex-col items-center md:items-start overflow-visible mt-4 md:mt-0">
                         <Polaroid
-                            src="/images/brook.png"
+                            src="/images/profile.png"
                             alt="Suspect Mugshot"
-                            caption="BROOK SOLOMON"
+                            caption="HAILE GENALE"
                             rotation={-2}
                             width={220}
                             height={280}
@@ -49,7 +49,7 @@ export default function SuspectPage() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-b border-dashed border-gray-400 pb-4">
                             <div>
                                 <span className="font-bold block text-gray-500 text-xs uppercase">Name</span>
-                                <span className="text-xl">Brook Solomon A.K.A Solo codes</span>
+                                <span className="text-xl">Haile Genale</span>
                             </div>
                             <div>
                                 <span className="font-bold block text-gray-500 text-xs uppercase">Alias</span>
@@ -86,19 +86,19 @@ export default function SuspectPage() {
                         <div className="space-y-4 pt-4">
                             <h3 className="font-display text-xl sm:text-2xl border-b border-black inline-block uppercase tracking-widest text-red-900">Digital Footprint</h3>
                             <div className="flex flex-wrap gap-2">
-                                <a href="https://github.com/brooksolomon" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] text-white px-2 py-1.5 flex items-center gap-1.5 hover:bg-red-900 transition-colors border border-black shadow-[2px_2px_0px_#000]">
+                                <a href="#" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] text-white px-2 py-1.5 flex items-center gap-1.5 hover:bg-red-900 transition-colors border border-black shadow-[2px_2px_0px_#000]">
                                     <Github className="w-3.5 h-3.5" />
                                     <span className="font-mono text-[10px]">GITHUB.EXE</span>
                                 </a>
-                                <a href="https://linkedin.com/in/brooksolomon" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] text-white px-2 py-1.5 flex items-center gap-1.5 hover:bg-red-900 transition-colors border border-black shadow-[2px_2px_0px_#000]">
+                                <a href="#" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] text-white px-2 py-1.5 flex items-center gap-1.5 hover:bg-red-900 transition-colors border border-black shadow-[2px_2px_0px_#000]">
                                     <Linkedin className="w-3.5 h-3.5" />
                                     <span className="font-mono text-[10px]">LINKEDIN.COM</span>
                                 </a>
-                                <a href="https://t.me/solodevchronicles" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] text-white px-2 py-1.5 flex items-center gap-1.5 hover:bg-red-900 transition-colors border border-black shadow-[2px_2px_0px_#000]">
+                                <a href="#" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] text-white px-2 py-1.5 flex items-center gap-1.5 hover:bg-red-900 transition-colors border border-black shadow-[2px_2px_0px_#000]">
                                     <Send className="w-3.5 h-3.5" />
                                     <span className="font-mono text-[10px]">TELEGRAM.MSG</span>
                                 </a>
-                                <a href="https://x.com/thebrooksolo" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] text-white px-2 py-1.5 flex items-center gap-1.5 hover:bg-red-900 transition-colors border border-black shadow-[2px_2px_0px_#000]">
+                                <a href="#" target="_blank" rel="noopener noreferrer" className="bg-[#1a1a1a] text-white px-2 py-1.5 flex items-center gap-1.5 hover:bg-red-900 transition-colors border border-black shadow-[2px_2px_0px_#000]">
                                     <Twitter className="w-3.5 h-3.5" />
                                     <span className="font-mono text-[10px]">X_COM.LOG</span>
                                 </a>
@@ -118,3 +118,5 @@ export default function SuspectPage() {
         </div>
     );
 }
+
+

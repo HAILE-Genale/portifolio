@@ -148,7 +148,7 @@ export default function TimelinePage() {
 
                             {/* Heatmap Container */}
                             <div className="relative z-10 w-full flex justify-center py-12 md:py-20 bg-[#080808] backdrop-blur-md border border-white/5 shadow-inner min-h-[400px]">
-                                <GithubHeatmap username="brooksolomon" />
+                                <GithubHeatmap username="hailegenale" />
 
                                 {/* Corner Brackets for Scanner look */}
                                 <div className="absolute top-4 left-4 w-10 h-10 border-t-2 border-l-2 border-accent-red/20" />
@@ -210,3 +210,4 @@ export default function TimelinePage() {
         </div>
     );
 }
+
