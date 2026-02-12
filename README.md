@@ -5,7 +5,7 @@
 A themed portfolio built as a crime-scene investigation: red strings, polaroids, evidence boards, and a suspect profile. Fully responsive with a custom cursor (desktop), hamburger nav (mobile), and the same artifact components in a list-on-mobile layout.
 
 
----
+live link: https://portfolio-eight-xi-sns5kjwc3w.vercel.app
 
 ## Features
 
